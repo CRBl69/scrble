@@ -2,6 +2,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Case } from '../case';
 import { Letter } from '../letter';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-scrabble',
@@ -358,7 +359,7 @@ export class ScrabbleComponent {
   }
 
   caseClicked(x: number, y: number, c: Case) {
-    if(this.selectedLetter != null && this.swapLeft == 7) {
+    if(this.selectedLetter != null && this.swapLeft == 7 && c.getLetter() == null) {
       this.selectedLetter.letter.unselect();
       c.setLetter(this.selectedLetter.letter);
       this.casesPut.push({c, x, y});
@@ -367,16 +368,20 @@ export class ScrabbleComponent {
     }
   }
 
-  done() {
-    this.swapLeft = 7;
-    this.calculatePoints();
-    for(let index in this.lettersOwned) {
-      while(this.lettersOwned[index].length < 7) this.getLetterFromPile(parseInt(index));
+  async done(e: any) {
+    e.target.disabled = true;
+    if(this.swapLeft != 7) {
+      this.swapLeft = 7;
+    } else if(await this.calculatePoints()) {
+      for(let index in this.lettersOwned) {
+        while(this.lettersOwned[index].length < 7) this.getLetterFromPile(parseInt(index));
+      }
+      this.player++;
+      if(this.player == this.nbPlayers) {
+        this.player = 0;
+      }
     }
-    this.player++;
-    if(this.player == this.nbPlayers) {
-      this.player = 0;
-    }
+    e.target.disabled = false;
   }
 
   swap() {
@@ -384,6 +389,7 @@ export class ScrabbleComponent {
       this.swapLeft--;
       this.selectedLetter.letter.unselect();
       this.letters.push(this.selectedLetter.letter.getLetter());
+      this.lettersOwned[this.player] = this.lettersOwned[this.player].filter(l => l != this.selectedLetter!.letter);
       this.getLetterFromPile(this.player);
     }
   }
@@ -396,23 +402,38 @@ export class ScrabbleComponent {
     }
   }
 
-  calculatePoints() {
+  async calculatePoints(): Promise<boolean> {
     let words: string[] = [];
+    let stop = false;
     for(let c of this.casesPut) {
+      if(stop) break;
       let word = this.getWords(c);
       for(let w of word) {
         if(w.word != "" && !words.includes(w.word)) {
+          if(!await this.checkWordValidity(w.word)) {
+            this.reset();
+            stop = true;
+            break;
+          }
           words.push(w.word);
           this.scores[this.player] += w.value;
         }
       }
     }
-    this.casesPut.forEach(c => {
-      c.c.takeBonus();
-    })
-    this.casesPut = [];
+    if(!stop) {
+      this.casesPut.forEach(c => {
+        c.c.takeBonus();
+      })
+      this.casesPut = [];
+    }
+    console.log(stop);
+    return !stop;
   }
 
+  async checkWordValidity(word: string): Promise<boolean> {
+    if(word.match(/\*/)) return new Promise(() => true);
+    return fetch(`https://scrabble.fr.wordsdb.ws/validate/${word}`).then(res => res.text()).then(res => res == "true" ? true : false);
+  }
   getWords(c: {c: Case, x: number, y: number}): {value: number, word: string}[] {
     return [this.getWordH(c), this.getWordV(c)];
   }

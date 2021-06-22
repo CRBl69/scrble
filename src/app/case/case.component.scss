@@ -6,43 +6,63 @@
 }
 .tripleWord {
     background-color: red;
+    position: relative;
 }
 .tripleWord::after {
+    position: absolute;
+    margin: auto;
     content: "triple word";
     text-align: center;
     color: #00000060;
+    z-index: 2;
 }
 .doubleWord {
     background-color: orange;
+    position: relative;
 }
 .doubleWord::after {
+    position: absolute;
+    margin: auto;
     content: "double word";
     text-align: center;
     color: #00000060;
+    z-index: 2;
 }
 .tripleLetter {
     background-color: aqua;
+    position: relative;
 }
 .tripleLetter::after {
+    position: absolute;
+    margin: auto;
     content: "triple letter";
     text-align: center;
     color: #00000060;
+    z-index: 2;
 }
 .doubleLetter {
     background-color: lightblue;
+    position: relative;
 }
 .doubleLetter::after {
+    position: absolute;
+    margin: auto;
     content: "double letter";
     text-align: center;
     color: #00000060;
+    z-index: 2;
 }
 .starting {
     background-color: coral;
+    position: relative;
 }
 .starting::after {
+    position: absolute;
+    margin: auto;
     content: "starting";
     text-align: center;
     color: #00000060;
+    z-index: 2;
 }
 .normal {
     background-color: green;

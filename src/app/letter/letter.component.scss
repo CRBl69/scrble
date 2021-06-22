@@ -1,5 +1,5 @@
 .letter {
-    display: inline-block;
+    display: inline-grid;
     height: 58px;
     width: 58px;
     background-color: bisque;
@@ -7,12 +7,14 @@
     font-size: xxx-large;
     text-transform: uppercase;
     position: relative;
+    z-index: 9;
+    place-items: center;
 }
 .amount {
     font-size: small;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 2px;
+    right: 2px;
 }
 .selected {
     z-index: 10;
