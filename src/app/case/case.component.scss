@@ -7,18 +7,43 @@
 .tripleWord {
     background-color: red;
 }
+.tripleWord::after {
+    content: "triple word";
+    text-align: center;
+    color: #00000060;
+}
 .doubleWord {
     background-color: orange;
+}
+.doubleWord::after {
+    content: "double word";
+    text-align: center;
+    color: #00000060;
 }
 .tripleLetter {
     background-color: aqua;
 }
+.tripleLetter::after {
+    content: "triple letter";
+    text-align: center;
+    color: #00000060;
+}
 .doubleLetter {
     background-color: lightblue;
 }
-.normal {
-    background-color: green;
+.doubleLetter::after {
+    content: "double letter";
+    text-align: center;
+    color: #00000060;
 }
 .starting {
     background-color: coral;
+}
+.starting::after {
+    content: "starting";
+    text-align: center;
+    color: #00000060;
+}
+.normal {
+    background-color: green;
 }

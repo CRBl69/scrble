@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CaseComponent } from './case/case.component';
 import { LetterComponent } from './letter/letter.component';
+import { ScrabbleComponent } from './scrabble/scrabble.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CaseComponent,
-    LetterComponent
+    LetterComponent,
+    ScrabbleComponent
   ],
   imports: [
     BrowserModule,
