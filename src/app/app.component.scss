@@ -1,0 +1,85 @@
+table, tr, td {
+    border: 1px solid darkgreen;
+    border-spacing: 0;
+    padding: 0;
+    margin: 0;
+}
+button {
+    outline: none;
+    border: none;
+    padding: 10px;
+    height: fit-content;
+    font-size: xx-large;
+    padding: 30px;
+}
+button:hover {
+    filter: brightness(1.2);
+    padding: 30px;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    flex-direction: row;
+    height: 100vh;
+}
+.letters {
+    display: flex;
+    flex-direction: column;
+}
+.done {
+    background-color: lightgreen;
+}
+.reset {
+    background-color: lightcoral;
+}
+.swap {
+    background-color: lightskyblue;
+}
+.scores td {
+    margin: 0;
+    padding: 4px;
+    outline: 0;
+    border: 1px solid black;
+    font-size: x-large;
+    text-align: center;
+}
+.scores {
+    border-spacing: 0;
+    border: 1px solid black;
+}
+.letters-container {
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+.hud {
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    place-items: center;
+}
+.hud * {
+    margin: 10px;
+}
+.letters-left {
+    font-size: xx-large;
+    grid-row: 3;
+}
+.buttons {
+    display: flex;
+    flex-direction: column;
+    grid-row: 2;
+}
+.player {
+    font-size: xx-large;
+}
+.scrabble {
+    place-self: center;
+    justify-self: center;
+    align-self: center;
+}
+.actual-player {
+    background-color: indianred;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: xx-large;
+}

@@ -1,0 +1,7 @@
+<div>
+    <div class="case" [ngClass]="this.case.getType()">
+        <div *ngIf="this.case.getLetter() != null">
+            <app-letter [letter]="this.case.getLetter() || nullLetter"></app-letter>
+        </div>
+    </div>
+</div>

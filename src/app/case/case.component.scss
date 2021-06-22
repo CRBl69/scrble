@@ -1,0 +1,24 @@
+.case {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+}
+.tripleWord {
+    background-color: red;
+}
+.doubleWord {
+    background-color: orange;
+}
+.tripleLetter {
+    background-color: aqua;
+}
+.doubleLetter {
+    background-color: lightblue;
+}
+.normal {
+    background-color: green;
+}
+.starting {
+    background-color: coral;
+}

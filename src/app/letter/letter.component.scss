@@ -1,0 +1,20 @@
+.letter {
+    display: inline-block;
+    height: 58px;
+    width: 58px;
+    background-color: bisque;
+    text-align: center;
+    font-size: xxx-large;
+    text-transform: uppercase;
+    position: relative;
+}
+.amount {
+    font-size: small;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.selected {
+    z-index: 10;
+    outline: 5px solid red;
+}
