@@ -2,7 +2,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Case } from '../case';
 import { Letter } from '../letter';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-scrabble',
@@ -10,343 +9,36 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./scrabble.component.scss']
 })
 export class ScrabbleComponent {
-  map = [
-    [
-      new Case("tripleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleWord"),
-    ],
-    [
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-    ],
-    [
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-    ],
-    [
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-    ],
-    [
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-    ],
-    [
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-    ],
-    [
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-    ],
-    [
-      new Case('tripleWord'),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("starting"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case('tripleWord'),
-    ],
-    [
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-    ],
-    [
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-    ],
-    [
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-    ],
-    [
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-    ],
-    [
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-    ],
-    [
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleWord"),
-      new Case("normal"),
-    ],
-    [
-      new Case("tripleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleWord"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("doubleLetter"),
-      new Case("normal"),
-      new Case("normal"),
-      new Case("tripleWord"),
-    ],
-  ];
-  letters = [
-    "a","a","a","a","a","a","a","a","a",
-    "b","b",
-    "c","c",
-    "d","d","d",
-    "e","e","e","e","e","e","e","e","e","e","e","e","e","e","e",
-    "f","f",
-    "g","g",
-    "h","h",
-    "i","i","i","i","i","i","i","i",
-    "j",
-    "k",
-    "l","l","l","l","l",
-    "m","m","m",
-    "n","n","n","n","n","n",
-    "o","o","o","o","o","o",
-    "p","p",
-    "q",
-    "r","r","r","r","r","r",
-    "s","s","s","s","s","s",
-    "t","t","t","t","t","t",
-    "u","u","u","u","u","u",
-    "v","v",
-    "w",
-    "x",
-    "Y",
-    "z",
-    "*", "*"
-  ];
+  map: Case[][] = [];
   values = new Map<string, number>();
-  lettersOwned: Letter[][] = [];
+  lettersOwned: Letter[] = [];
   selectedLetter: {letter: Letter, player: number} | null = null;
   player: number = 0;
   casesPut: {c: Case, x: number, y: number}[] = [];
-  scores: number[] = [];
+  scores: {name: string, score: number}[] = [];
   swapLeft = 7;
-  nbPlayers = 4;
+  roomName = '';
+  ws: WebSocket;
+  gameState = false;
+  selfName = localStorage.getItem('username');
+  doneDisabled = false;
+  lettersLeft = 0;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    {
-      this.values.set("a", 1);
-      this.values.set("b", 3);
-      this.values.set("c", 3);
-      this.values.set("d", 2);
-      this.values.set("e", 1);
-      this.values.set("f", 4);
-      this.values.set("g", 2);
-      this.values.set("h", 4);
-      this.values.set("i", 1);
-      this.values.set("j", 8);
-      this.values.set("k", 10);
-      this.values.set("l", 1);
-      this.values.set("m", 2);
-      this.values.set("n", 1);
-      this.values.set("o", 1);
-      this.values.set("p", 3);
-      this.values.set("q", 8);
-      this.values.set("r", 1);
-      this.values.set("s", 1);
-      this.values.set("t", 1);
-      this.values.set("u", 1);
-      this.values.set("v", 4);
-      this.values.set("w", 10);
-      this.values.set("x", 10);
-      this.values.set("y", 10);
-      this.values.set("z", 10);
-      this.values.set("*", 0);
-    }
-    this.route.paramMap.subscribe(res => {
-      this.nbPlayers = parseInt(res.get('players')!);
-    })
-    for(let i = 0; i < this.nbPlayers; i++) {
-      this.lettersOwned[i] = [];
-      this.scores[i] = 0;
-      for(let j = 0; j < 7; j++) {
-        this.getLetterFromPile(i);
-      }
+    this.ws = new WebSocket('ws://localhost:6942/ws');
+    this.ws.onmessage = this.handleWs;
+    this.ws.onopen = () => {
+      this.route.paramMap.subscribe(res => {
+        this.roomName = res.get('name')!;
+        this.ws.send(JSON.stringify({
+          type: 'join',
+          room: this.roomName,
+          data: {playerName: localStorage.getItem('username')}
+        }))
+      })
     }
   }
 
@@ -359,141 +51,86 @@ export class ScrabbleComponent {
   }
 
   caseClicked(x: number, y: number, c: Case) {
-    if(this.selectedLetter != null && this.swapLeft == 7 && c.getLetter() == null) {
+    if(this.selectedLetter != null) {
       this.selectedLetter.letter.unselect();
-      c.setLetter(this.selectedLetter.letter);
-      this.casesPut.push({c, x, y});
-      this.lettersOwned[this.selectedLetter.player] = this.lettersOwned[this.selectedLetter.player].filter(l => l != this.selectedLetter?.letter);
+      let letterIndex = this.lettersOwned.indexOf(this.selectedLetter.letter);
+      this.ws.send(JSON.stringify({
+        type: 'caseClicked',
+        room: this.roomName,
+        data: {
+          letterIndex,
+          x,
+          y
+        }
+      }));
       this.selectedLetter = null;
     }
   }
 
-  async done(e: any) {
-    e.target.disabled = true;
-    if(this.swapLeft != 7) {
-      this.swapLeft = 7;
-    } else if(await this.calculatePoints()) {
-      for(let index in this.lettersOwned) {
-        while(this.lettersOwned[index].length < 7) this.getLetterFromPile(parseInt(index));
-      }
-      this.player++;
-      if(this.player == this.nbPlayers) {
-        this.player = 0;
-      }
-    }
-    e.target.disabled = false;
+  done() {
+    this.doneDisabled = true;
+    this.ws.send(JSON.stringify({
+      type: 'done',
+      room: this.roomName,
+      data: null
+    }));
   }
 
   swap() {
-    if(this.letters.length > 0 && this.selectedLetter != null && this.casesPut.length == 0 && this.swapLeft > 0) {
-      this.swapLeft--;
-      this.selectedLetter.letter.unselect();
-      this.letters.push(this.selectedLetter.letter.getLetter());
-      this.lettersOwned[this.player] = this.lettersOwned[this.player].filter(l => l != this.selectedLetter!.letter);
-      this.getLetterFromPile(this.player);
+    if(this.selectedLetter != null) {
+      let letterIndex = this.lettersOwned.indexOf(this.selectedLetter.letter);
+      this.ws.send(JSON.stringify({
+        type: 'swap',
+        room: this.roomName,
+        data: letterIndex
+      }));
+      this.selectedLetter = null;
     }
   }
 
   reset() {
-    for(let l of this.casesPut) {
-      let letter = l.c.getLetter();
-      if(letter != null) this.lettersOwned[this.player].push(letter);
-      l.c.removeLetter();
+    this.ws.send(JSON.stringify({
+      type: 'reset',
+      room: this.roomName,
+      data: null
+    }));
+  }
+
+  start(){
+    this.ws.send(JSON.stringify({
+      type: 'start',
+      room: this.roomName,
+      data: null
+    }))
+  }
+
+  handleWs = (ev: MessageEvent) => {
+    try {
+      let obj = JSON.parse(ev.data);
+      console.log(obj);
+      switch(obj.type) {
+        case 'update':
+          this.gameState = obj.data.started;
+          this.lettersOwned = obj.data.letters.map((letter: any) => new Letter(letter.letter, letter.amount));
+          this.scores = obj.data.scores;
+          this.map = obj.data.map.map((row: any) => row.map((c: any) => new Case('normal').fromObject(c)));
+          this.lettersLeft = obj.data.lettersLeft;
+          break;
+        case 'start':
+          this.gameState = true;
+          this.lettersOwned = obj.data.map((letter: any) => new Letter(letter.letter, letter.amount));
+          break;
+        case 'turn':
+          this.doneDisabled = false;
+          break;
+      }
+    } catch(e) {
+      console.error(ev.data, e);
     }
   }
 
-  async calculatePoints(): Promise<boolean> {
-    let words: string[] = [];
-    let stop = false;
-    for(let c of this.casesPut) {
-      if(stop) break;
-      let word = this.getWords(c);
-      for(let w of word) {
-        if(w.word != "" && !words.includes(w.word)) {
-          if(!await this.checkWordValidity(w.word)) {
-            this.reset();
-            stop = true;
-            break;
-          }
-          words.push(w.word);
-          this.scores[this.player] += w.value;
-        }
-      }
-    }
-    if(!stop) {
-      this.casesPut.forEach(c => {
-        c.c.takeBonus();
-      })
-      this.casesPut = [];
-    }
-    console.log(stop);
-    return !stop;
+  getSelfScore() {
+    let x = this.scores.find(s => s.name == this.selfName)?.score;
+    return x;
   }
-
-  async checkWordValidity(word: string): Promise<boolean> {
-    if(word.match(/\*/)) return new Promise(() => true);
-    return fetch(`https://scrabble.fr.wordsdb.ws/validate/${word}`).then(res => res.text()).then(res => res == "true" ? true : false);
-  }
-  getWords(c: {c: Case, x: number, y: number}): {value: number, word: string}[] {
-    return [this.getWordH(c), this.getWordV(c)];
-  }
-  getWordV(c: {c: Case, x: number, y: number}): {value: number, word: string} {
-    if((c.x - 1 > 0 &&this.map[c.x - 1][c.y].getLetter() != null) || (c.x + 1 < this.map.length && this.map[c.x + 1][c.y].getLetter() != null)) {
-      let total = 0;
-      let word = "";
-      let i = 0;
-      while(c.x - i > 0 && this.map[c.x - i][c.y].getLetter() != null) {
-        i++;
-      }
-      let begin = c.x - i + 1;
-      i = 0
-      while(begin + i < this.map.length && this.map[begin + i][c.y].getLetter() != null) {
-        i++;
-      }
-      let end = begin + i;
-      let multuplier = 1;
-      for(let i = begin; i < end; i++) {
-        let caseM = this.map[i][c.y].getMultiplier();
-        if(caseM > multuplier) multuplier = caseM;
-        total += this.map[i][c.y].getLetterScore();
-        word += this.map[i][c.y].getLetter()?.getLetter();
-      }
-      return {value: total * multuplier, word};
-    } else {
-      return {value: 0, word: ""};
-    }
-  }
-  getWordH(c: {c: Case, x: number, y: number}): {value: number, word: string} {
-    if(this.map[c.x][c.y - 1].getLetter() != null || this.map[c.x][c.y + 1].getLetter() != null) {
-      let total = 0;
-      let word = "";
-      let i = 0;
-      while(c.y - i > 0 && this.map[c.x][c.y - i].getLetter() != null) {
-        i++;
-      }
-      let begin = c.y - i + 1;
-      i = 0
-      while(begin + i < this.map.length && this.map[c.x][begin + i].getLetter() != null) {
-        i++;
-      }
-      let end = begin + i;
-      let multuplier = 1;
-      for(let i = begin; i < end; i++) {
-        if(this.map[c.x][i].getType() == "tripleWord") multuplier = 3;
-        else if(this.map[c.x][i].getType() == "doubleWord") multuplier = 2;
-        total += this.map[c.x][i].getLetterScore();
-        word += this.map[c.x][i].getLetter()?.getLetter();
-      }
-      return {value: total * multuplier, word};
-    } else {
-      return {value: 0, word: ""};
-    }
-  }
-
-  getLetterFromPile(player: number) {
-    let rand = Math.floor(Math.random() * this.letters.length);
-    this.lettersOwned[player].push(new Letter(this.letters[rand], this.values.get(this.letters[rand]) ?? 0));
-    this.letters = [...this.letters.slice(0, rand), ...this.letters.slice(rand + 1)];
-  }
-
 }

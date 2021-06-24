@@ -1,8 +1,8 @@
-<div *ngIf="gameState == true" class="container">
+<div class="container">
   <div class="letters-container">
     <div class="letters">
-      <p class="actual-player">{{selfName}} ({{getSelfScore()}}pts)</p>
-      <app-letter *ngFor="let letter of lettersOwned" class="letter" [letter]="letter" (click)="selectLetter(letter, player)"></app-letter>
+      <p class="actual-player">Player {{player + 1}} ({{scores[player]}}pts)</p>
+      <app-letter *ngFor="let letter of lettersOwned[player]" class="letter" [letter]="letter" (click)="selectLetter(letter, player)"></app-letter>
     </div>
   </div>
   <table class="scrabble">
@@ -20,22 +20,18 @@
           <td>Points</td>
         </thead>
         <tr *ngFor="let score of this.scores; let i = index">
-          <td>{{score.name}}</td>
-          <td>{{score.score}}</td>
+          <td>Player {{i + 1}}</td>
+          <td>{{score}}</td>
         </tr>
       </table>
     </div>
     <div class="buttons">
-      <button class="done" (click)="done()" [disabled]="doneDisabled">Done</button>
+      <button class="done" (click)="done($event)">Done</button>
       <button class="reset" (click)="reset()">Reset</button>
       <button class="swap" (click)="swap()">Swap</button>
     </div>
     <div class="letters-left">
-      Letters left: {{lettersLeft}}
+      Letters left: {{letters.length}}
     </div>
   </div>
-</div>
-
-<div *ngIf="gameState == false">
-  <button (click)="start()">Start</button>
 </div>

@@ -43,4 +43,12 @@ export class Case {
     takeBonus() {
         this.bonusTaken = true;
     }
+
+    fromObject(obj: any) {
+        this.type = obj.type;
+        this.bonusTaken = obj.bonusTaken;
+        if(obj.letter == null) this.letter = null;
+        else this.letter = new Letter(obj.letter.letter, obj.letter.amount);
+        return this;
+    }
 }
