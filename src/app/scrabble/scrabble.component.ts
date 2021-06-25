@@ -23,12 +23,13 @@ export class ScrabbleComponent {
   selfName = localStorage.getItem('username');
   doneDisabled = false;
   lettersLeft = 0;
+  actualPlayer = '';
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.ws = new WebSocket('ws://localhost:6942/ws');
+    this.ws = new WebSocket('ws://bite.ddns.net:6942/ws');
     this.ws.onmessage = this.handleWs;
     this.ws.onopen = () => {
       this.route.paramMap.subscribe(res => {
@@ -114,7 +115,9 @@ export class ScrabbleComponent {
           this.lettersOwned = obj.data.letters.map((letter: any) => new Letter(letter.letter, letter.amount));
           this.scores = obj.data.scores;
           this.map = obj.data.map.map((row: any) => row.map((c: any) => new Case('normal').fromObject(c)));
-          this.lettersLeft = obj.data.lettersLeft;
+          this.lettersLeft = obj.data.left;
+          this.actualPlayer = obj.data.actualPlayer;
+          console.log(this.actualPlayer);
           break;
         case 'start':
           this.gameState = true;
@@ -122,6 +125,9 @@ export class ScrabbleComponent {
           break;
         case 'turn':
           this.doneDisabled = false;
+          break;
+        case 'end':
+          alert('The end !');
           break;
       }
     } catch(e) {

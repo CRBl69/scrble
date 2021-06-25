@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    width: 100vw;
+}
+.container * {
+    margin: 20px;
+}
+#clear-username {
+    background-color: lightcoral;
+}
+#room-list {
+    background-color: aquamarine;
+}
+#create-room {
+    background-color: bisque;
+}
+#join-room {
+    background-color: darkseagreen;
+}

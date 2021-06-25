@@ -4,18 +4,6 @@ table, tr, td {
     padding: 0;
     margin: 0;
 }
-button {
-    outline: none;
-    border: none;
-    padding: 10px;
-    height: fit-content;
-    font-size: xx-large;
-    padding: 30px;
-}
-button:hover {
-    filter: brightness(1.2);
-    padding: 30px;
-}
 .container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -80,9 +68,23 @@ button:hover {
     justify-self: center;
     align-self: center;
 }
-.actual-player {
-    background-color: indianred;
+.username {
     border-radius: 10px;
     padding: 5px 10px;
     font-size: xx-large;
+}
+.not-actual-player {
+    background-color: indianred;
+}
+.actual-player {
+    background-color: greenyellow !important;
+}
+.start {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    place-items: center;
+}
+.start button {
+    background-color: lightseagreen;
 }

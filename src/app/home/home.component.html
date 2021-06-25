@@ -1,0 +1,13 @@
+<marquee>
+    <h1>Welcome {{getUsername()}} !</h1>
+</marquee>
+
+<div class="container">
+    <button (click)="clearUsername()" id="clear-username">Clear username</button>
+    <a routerLink="/rooms"><button id="room-list">Room list</button></a>
+    <a routerLink="/new"><button id="create-room">Create room</button></a>
+    <div>
+        <input type="text" #roomName>
+        <button (click)="join(roomName.value)" id="join-room">Join room</button>
+    </div>
+</div>

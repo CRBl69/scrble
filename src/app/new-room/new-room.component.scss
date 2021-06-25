@@ -1,0 +1,14 @@
+.create-room-container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.create-room-form {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+}
+.create-room-form button {
+    background-color: lightcoral;
+}

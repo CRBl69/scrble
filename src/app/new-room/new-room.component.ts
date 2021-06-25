@@ -13,6 +13,7 @@ export class NewRoomComponent {
   error = '';
 
   constructor(private router: Router) {
+    this.playerName = localStorage.getItem('username') ?? '';
   }
 
   createRoom() {
@@ -21,7 +22,7 @@ export class NewRoomComponent {
       method: 'POST',
       body: this.roomName
     }
-    fetch('http://localhost:6942/new-room', options).then(res => res.text()).then(res => {
+    fetch('http://bite.ddns.net:6942/new-room', options).then(res => res.text()).then(res => {
       if(res == "created") {
         this.router.navigateByUrl(`/room/${this.roomName}`);
       } else {

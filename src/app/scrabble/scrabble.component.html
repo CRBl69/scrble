@@ -1,7 +1,7 @@
 <div *ngIf="gameState == true" class="container">
   <div class="letters-container">
     <div class="letters">
-      <p class="actual-player">{{selfName}} ({{getSelfScore()}}pts)</p>
+      <p class="username" [ngClass]="{'not-actual-player': doneDisabled, 'actual-player': !doneDisabled}">{{selfName}} ({{getSelfScore()}}pts)</p>
       <app-letter *ngFor="let letter of lettersOwned" class="letter" [letter]="letter" (click)="selectLetter(letter, player)"></app-letter>
     </div>
   </div>
@@ -19,7 +19,7 @@
           <td>Player</td>
           <td>Points</td>
         </thead>
-        <tr *ngFor="let score of this.scores; let i = index">
+        <tr *ngFor="let score of this.scores; let i = index" [ngClass]="{'actual-player': this.actualPlayer == score.name}">
           <td>{{score.name}}</td>
           <td>{{score.score}}</td>
         </tr>
@@ -36,6 +36,9 @@
   </div>
 </div>
 
-<div *ngIf="gameState == false">
+<div *ngIf="gameState == false" class="start">
+  <ul>
+    <li *ngFor="let player of this.scores">{{player.name}}</li>
+  </ul>
   <button (click)="start()">Start</button>
 </div>

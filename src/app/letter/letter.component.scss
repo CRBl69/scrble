@@ -9,11 +9,13 @@
     position: relative;
     z-index: 9;
     place-items: center;
+    user-select: none;
 }
 .amount {
     font-size: small;
     position: absolute;
     bottom: 2px;
+    user-select: none;
     right: 2px;
 }
 .selected {

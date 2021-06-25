@@ -8,7 +8,7 @@ import { Letter } from '../letter';
   templateUrl: './local.component.html',
   styleUrls: ['./local.component.scss']
 })
-export class ScrabbleComponent {
+export class LocalComponent {
   map = [
     [
       new Case("tripleWord"),
@@ -339,14 +339,14 @@ export class ScrabbleComponent {
     }
     this.route.paramMap.subscribe(res => {
       this.nbPlayers = parseInt(res.get('players')!);
+        for(let i = 0; i < this.nbPlayers; i++) {
+          this.lettersOwned[i] = [];
+          this.scores[i] = 0;
+          for(let j = 0; j < 7; j++) {
+            this.getLetterFromPile(i);
+          }
+        }
     })
-    for(let i = 0; i < this.nbPlayers; i++) {
-      this.lettersOwned[i] = [];
-      this.scores[i] = 0;
-      for(let j = 0; j < 7; j++) {
-        this.getLetterFromPile(i);
-      }
-    }
   }
 
   selectLetter(letter: Letter, player: number) {
@@ -494,7 +494,7 @@ export class ScrabbleComponent {
     }
   }
   getWordH(c: {c: Case, x: number, y: number}): {value: number, word: string} {
-    if(c.y - 1 >= 0 && this.map[c.x][c.y - 1].getLetter() != null || this.map[c.x][c.y + 1].getLetter() != null) {
+    if((c.y - 1 >= 0 && this.map[c.x][c.y - 1].getLetter() != null) ||(c.y + 1 < this.map.length && this.map[c.x][c.y + 1].getLetter() != null)) {
       let total = 0;
       let word = "";
       let i = 0;

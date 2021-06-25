@@ -7,10 +7,12 @@ import { CaseComponent } from './case/case.component';
 import { LetterComponent } from './letter/letter.component';
 import { ScrabbleComponent } from './scrabble/scrabble.component';
 import { NewRoomComponent } from './new-room/new-room.component';
+import { LocalComponent } from './local/local.component';
 
 import { FormsModule } from '@angular/forms';
 import { JoinComponent } from './join/join.component';
 import { RoomsComponent } from './rooms/rooms.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RoomsComponent } from './rooms/rooms.component';
     ScrabbleComponent,
     NewRoomComponent,
     JoinComponent,
-    RoomsComponent
+    LocalComponent,
+    RoomsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

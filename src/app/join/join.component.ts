@@ -8,15 +8,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class JoinComponent {
   name: string = '';
+  room: string = '';
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.route.paramMap.subscribe(res => {
+      this.room = res.get('name') ?? '';
+      if(localStorage.getItem('username') != null) this.router.navigateByUrl(`/room/${this.room}`);
+    });
+  }
 
   join() {
     if(this.name == '') return;
     localStorage.setItem('username', this.name)
 
-    this.route.paramMap.subscribe(res => {
-      this.router.navigateByUrl(`/room/${res.get('name')}`);
-    });
+    this.router.navigateByUrl(`/room/${this.room}`);
   }
 }
