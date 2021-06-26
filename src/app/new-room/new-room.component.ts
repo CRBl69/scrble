@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-room',
@@ -22,7 +23,7 @@ export class NewRoomComponent {
       method: 'POST',
       body: this.roomName
     }
-    fetch('http://bite.ddns.net:6942/new-room', options).then(res => res.text()).then(res => {
+    fetch(`http://${environment.domain}:6942/new-room`, options).then(res => res.text()).then(res => {
       if(res == "created") {
         this.router.navigateByUrl(`/room/${this.roomName}`);
       } else {

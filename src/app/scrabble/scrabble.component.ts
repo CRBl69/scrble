@@ -2,6 +2,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Case } from '../case';
 import { Letter } from '../letter';
+import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-scrabble',
@@ -29,7 +31,7 @@ export class ScrabbleComponent {
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.ws = new WebSocket('ws://bite.ddns.net:6942/ws');
+    this.ws = new WebSocket(`ws://${environment.domain}:6942/ws`);
     this.ws.onmessage = this.handleWs;
     this.ws.onopen = () => {
       this.route.paramMap.subscribe(res => {
