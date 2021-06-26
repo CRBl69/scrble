@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Case } from '../case';
 import { Letter } from '../letter';
 import { environment } from 'src/environments/environment';
-// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-scrabble',
@@ -22,8 +21,7 @@ export class ScrabbleComponent {
   roomName = '';
   ws: WebSocket;
   gameState = false;
-  selfName = localStorage.getItem('username');
-  doneDisabled = false;
+  selfName = localStorage.getItem('username') ?? 'username not found';
   lettersLeft = 0;
   actualPlayer = '';
 
@@ -71,7 +69,6 @@ export class ScrabbleComponent {
   }
 
   done() {
-    this.doneDisabled = true;
     this.ws.send(JSON.stringify({
       type: 'done',
       room: this.roomName,
@@ -119,14 +116,13 @@ export class ScrabbleComponent {
           this.map = obj.data.map.map((row: any) => row.map((c: any) => new Case('normal').fromObject(c)));
           this.lettersLeft = obj.data.left;
           this.actualPlayer = obj.data.actualPlayer;
-          console.log(this.actualPlayer);
           break;
         case 'start':
           this.gameState = true;
           this.lettersOwned = obj.data.map((letter: any) => new Letter(letter.letter, letter.amount));
           break;
         case 'turn':
-          this.doneDisabled = false;
+          this.actualPlayer = this.selfName;
           break;
         case 'end':
           alert('The end !');
