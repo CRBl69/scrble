@@ -22,6 +22,6 @@ export class HomeComponent implements OnInit {
   }
 
   join(roomName: string) {
-    this.router.navigateByUrl(`/join/${roomName}`);
+    this.router.navigateByUrl(`/room/${roomName}`);
   }
 }

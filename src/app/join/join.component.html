@@ -1,2 +1,8 @@
-<input type="text" placeholder="username" [(ngModel)]="name">
-<button (click)="join()">Go !</button>
+<div class="container">
+    <div>
+        <form (ngSubmit)="join()">
+            <input type="text" placeholder="username" [(ngModel)]="name" name="name">
+            <button type="submit">Go !</button>
+        </form>
+    </div>
+</div>

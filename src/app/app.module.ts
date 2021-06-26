@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { JoinComponent } from './join/join.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HomeComponent } from './home/home.component';
+import { SmartComponent } from './smart/smart.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomeComponent } from './home/home.component';
     JoinComponent,
     LocalComponent,
     RoomsComponent,
-    HomeComponent
+    HomeComponent,
+    SmartComponent
   ],
   imports: [
     BrowserModule,

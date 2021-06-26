@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-join',
@@ -9,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class JoinComponent {
   name: string = '';
   room: string = '';
+  @Output() roomJoined = new EventEmitter();
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.route.paramMap.subscribe(res => {
@@ -19,8 +21,8 @@ export class JoinComponent {
 
   join() {
     if(this.name == '') return;
-    localStorage.setItem('username', this.name)
+    localStorage.setItem('username', this.name);
 
-    this.router.navigateByUrl(`/room/${this.room}`);
+    this.roomJoined.emit('');
   }
 }

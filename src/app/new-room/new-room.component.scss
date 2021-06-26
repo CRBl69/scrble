@@ -8,7 +8,9 @@
     display: flex;
     flex-direction: column;
     width: 30vw;
+    align-items: center;
 }
 .create-room-form button {
     background-color: lightcoral;
+    width: max-content;
 }

@@ -1,0 +1,10 @@
+<div *ngIf="!this.roomExists">
+    <h1 *ngIf="this.roomName">Room doesn't exist</h1>
+    <app-new-room [predefinedName]="roomName" (roomCreated)="roomCreated($event)"></app-new-room>
+</div>
+<div *ngIf="this.roomExists">
+    <app-join *ngIf="this.username == ''" (roomJoined)="updateUsername()"></app-join>
+    <div *ngIf="this.username != ''">
+        <app-scrabble></app-scrabble>
+    </div>
+</div>

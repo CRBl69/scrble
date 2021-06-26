@@ -21,7 +21,7 @@
         </thead>
         <tr *ngFor="let score of this.scores; let i = index" [ngClass]="{'actual-player': this.actualPlayer == score.name}">
           <td>{{score.name}}</td>
-          <td>{{score.score}}</td>
+          <td class="points-diff" abbr="{{getPointsDiff(score.name)}}">{{score.score}}</td>
         </tr>
       </table>
     </div>
@@ -40,6 +40,5 @@
   <ul>
     <li *ngFor="let player of this.scores">{{player.name}}</li>
   </ul>
-  <button (click)="start()">Start</button>
+  <button *ngIf="error === ''" (click)="start()">Start</button>
 </div>
-<button (click)="quit()">Quit</button>
