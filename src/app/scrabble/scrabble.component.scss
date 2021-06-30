@@ -88,7 +88,3 @@ table, tr, td {
 .start button {
     background-color: lightseagreen;
 }
-.points-diff[abbr]::after {
-    content: attr(abbr);
-    color: gray;
-}

@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Case } from '../case';
 import { Letter } from '../letter';
 import { environment } from 'src/environments/environment';
@@ -10,69 +10,49 @@ import { WsMessage } from '../ws-message';
   templateUrl: './scrabble.component.html',
   styleUrls: ['./scrabble.component.scss']
 })
-export class ScrabbleComponent {
+export class ScrabbleComponent implements OnDestroy {
+  @Input() roomName = '';
   map: Case[][] = [];
-  values = new Map<string, number>();
   lettersOwned: Letter[] = [];
-  selectedLetter: { letter: Letter, player: number } | null = null;
-  player: number = 0;
-  casesPut: { c: Case, x: number, y: number }[] = [];
+  selectedLetter: Letter | null = null;
   scores: { name: string, score: number }[] = [];
-  oldScores: { name: string, score: number }[] = [];
-  swapLeft = 7;
-  roomName = '';
   ws: WebSocket;
-  gameState = false;
-  selfName = localStorage.getItem('username') ?? '';
+  gameStarted = false;
+  username = localStorage.getItem('username') ?? '';
   lettersLeft = 0;
   actualPlayer = '';
   error = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    public router: Router,
-    ) {
-      this.ws = new WebSocket(`ws://${environment.domain}:6942/ws`);
-      this.ws.onmessage = this.handleWs;
-      this.ws.onopen = () => {
-        this.route.paramMap.subscribe(res => {
-          this.roomName = res.get('name')!;
-          let roomExists = false;
-          fetch(`http://${environment.domain}:6942/rooms`).then(res => res.json()).then(res => {
-            res.forEach((r: string) => {
-              if(r == this.roomName) roomExists = true;
-            });
-            if(!roomExists) this.error = 'Room doesn\'t exist';
-          })
-          this.sendMsg({
-            type: 'join',
-            room: this.roomName,
-            data: { playerName: localStorage.getItem('username') }
-          })
-        })
-      }
-    }
-
-  selectLetter(letter: Letter, player: number) {
-    if (this.player == player) {
-      this.selectedLetter?.letter.unselect();
-      this.selectedLetter = { letter, player };
-      letter.select();
+  constructor() {
+    this.ws = new WebSocket(`ws://${environment.domain}:6942/ws`);
+    this.ws.onmessage = this.handleWs;
+    this.ws.onopen = () => {
+      this.sendMsg({
+        type: 'join',
+        room: this.roomName,
+        data: { playerName: this.username }
+      })
     }
   }
 
-  caseClicked(x: number, y: number, c: Case) {
+  ngOnDestroy() {
+    this.ws.close();
+  }
+
+  selectLetter(letter: Letter) {
+    this.selectedLetter?.unselect();
+    this.selectedLetter = letter;
+    letter.select();
+  }
+
+  caseClicked(x: number, y: number) {
     if (this.selectedLetter != null) {
-      this.selectedLetter.letter.unselect();
-      let letterIndex = this.lettersOwned.indexOf(this.selectedLetter.letter);
+      this.selectedLetter.unselect();
+      let letterIndex = this.lettersOwned.indexOf(this.selectedLetter);
       this.sendMsg({
         type: 'caseClicked',
         room: this.roomName,
-        data: {
-          letterIndex,
-          x,
-          y
-        }
+        data: { letterIndex, x, y }
       });
       this.selectedLetter = null;
     }
@@ -88,7 +68,8 @@ export class ScrabbleComponent {
 
   swap() {
     if (this.selectedLetter != null) {
-      let letterIndex = this.lettersOwned.indexOf(this.selectedLetter.letter);
+      this.selectedLetter.unselect();
+      let letterIndex = this.lettersOwned.indexOf(this.selectedLetter);
       this.sendMsg({
         type: 'swap',
         room: this.roomName,
@@ -119,26 +100,19 @@ export class ScrabbleComponent {
       let obj: WsMessage = JSON.parse(ev.data);
       switch (obj.type) {
         case 'update':
-          this.gameState = obj.data.started;
+          this.gameStarted = obj.data.started;
           this.lettersOwned = obj.data.letters.map((letter: any) => new Letter(letter.letter, letter.amount));
-          this.oldScores = this.scores.map(score => {
-            let newScore = obj.data.scores.find((sc: any) => sc.name == score.name)!;
-            let oldScore = this.oldScores.find(o => o.name == score.name)!;
-            if(oldScore === undefined) return score;
-            if(score.score == newScore.score) return oldScore;
-            return score;
-          });
           this.scores = obj.data.scores;
-          this.map = obj.data.map.map((row: any) => row.map((c: any) => new Case('normal').fromObject(c)));
+          this.map = obj.data.map.map((row: any) => row.map((c: any) => Case.fromObject(c)));
           this.lettersLeft = obj.data.left;
           this.actualPlayer = obj.data.actualPlayer;
           break;
         case 'start':
-          this.gameState = true;
+          this.gameStarted = true;
           this.lettersOwned = obj.data.map((letter: any) => new Letter(letter.letter, letter.amount));
           break;
         case 'turn':
-          this.actualPlayer = this.selfName;
+          this.actualPlayer = this.username;
           break;
         case 'end':
           alert('The end !');
@@ -150,25 +124,11 @@ export class ScrabbleComponent {
   }
 
   getSelfScore() {
-    let x = this.scores.find(s => s.name == this.selfName)?.score;
+    let x = this.scores.find(s => s.name == this.username)?.score;
     return x;
   }
 
   sendMsg(msg: WsMessage) {
     this.ws.send(JSON.stringify(msg));
-  }
-
-  getPointsDiff(name: string): string {
-    let score = this.scores.find(p => p.name == name);
-    let oldScore = this.oldScores.find(p => p.name == name);
-    if(score != undefined && oldScore != undefined) {
-      return `+${score.score - oldScore.score}`;
-    }
-    return '';
-  }
-
-  getUsername(){
-    this.selfName = localStorage.getItem('username') ?? '';
-    return this.selfName;
   }
 }

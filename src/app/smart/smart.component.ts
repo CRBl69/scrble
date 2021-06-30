@@ -27,7 +27,6 @@ export class SmartComponent {
 
   updateUsername() {
     this.username = localStorage.getItem('username') ?? '';
-    console.log(this.username);
   }
 
   roomCreated(room: string) {

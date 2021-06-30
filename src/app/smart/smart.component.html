@@ -5,6 +5,6 @@
 <div *ngIf="this.roomExists">
     <app-join *ngIf="this.username == ''" (roomJoined)="updateUsername()"></app-join>
     <div *ngIf="this.username != ''">
-        <app-scrabble></app-scrabble>
+        <app-scrabble [roomName]="roomName"></app-scrabble>
     </div>
 </div>

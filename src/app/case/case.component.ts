@@ -9,8 +9,6 @@ import { Letter } from '../letter';
 })
 export class CaseComponent implements OnInit {
   @Input() case: Case = new Case("normal");
-  @Input() x: number = 0;
-  @Input() y: number = 0;
 
   nullLetter = new Letter("",0);
 

@@ -1,14 +1,14 @@
-<div *ngIf="gameState == true" class="container">
+<div *ngIf="gameStarted== true" class="container">
   <div class="letters-container">
     <div class="letters">
-      <p class="username" [ngClass]="{'not-actual-player': actualPlayer != selfName, 'actual-player': actualPlayer == selfName}">{{selfName}} ({{getSelfScore()}}pts)</p>
-      <app-letter *ngFor="let letter of lettersOwned" class="letter" [letter]="letter" (click)="selectLetter(letter, player)"></app-letter>
+      <p class="username" [ngClass]="{'not-actual-player': actualPlayer != username, 'actual-player': actualPlayer == username}">{{username}} ({{getSelfScore()}}pts)</p>
+      <app-letter *ngFor="let letter of lettersOwned" class="letter" [letter]="letter" (click)="selectLetter(letter)"></app-letter>
     </div>
   </div>
   <table class="scrabble">
     <tr *ngFor="let array of map; let i = index">
       <td *ngFor="let case of array; let j = index">
-        <app-case [case]="case" [x]="i" [y]="j" (click)="caseClicked(i, j, case)"></app-case>
+        <app-case [case]="case" (click)="caseClicked(i, j)"></app-case>
       </td>
     </tr>
   </table>
@@ -21,12 +21,12 @@
         </thead>
         <tr *ngFor="let score of this.scores; let i = index" [ngClass]="{'actual-player': this.actualPlayer == score.name}">
           <td>{{score.name}}</td>
-          <td class="points-diff" abbr="{{getPointsDiff(score.name)}}">{{score.score}}</td>
+          <td>{{score.score}}</td>
         </tr>
       </table>
     </div>
     <div class="buttons">
-      <button class="done" (click)="done()" [disabled]="actualPlayer != selfName">Done</button>
+      <button class="done" (click)="done()" [disabled]="actualPlayer != username">Done</button>
       <button class="reset" (click)="reset()">Reset</button>
       <button class="swap" (click)="swap()">Swap</button>
     </div>
@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<div *ngIf="gameState == false" class="start">
+<div *ngIf="gameStarted == false" class="start">
   <ul>
     <li *ngFor="let player of this.scores">{{player.name}}</li>
   </ul>

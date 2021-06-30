@@ -8,7 +8,7 @@
   <table class="scrabble">
     <tr *ngFor="let array of map; let i = index">
       <td *ngFor="let case of array; let j = index">
-        <app-case [case]="case" [x]="i" [y]="j" (click)="caseClicked(i, j, case)"></app-case>
+        <app-case [case]="case" (click)="caseClicked(i, j, case)"></app-case>
       </td>
     </tr>
   </table>

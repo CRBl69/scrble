@@ -44,11 +44,12 @@ export class Case {
         this.bonusTaken = true;
     }
 
-    fromObject(obj: any) {
-        this.type = obj.type;
-        this.bonusTaken = obj.bonusTaken;
-        if(obj.letter == null) this.letter = null;
-        else this.letter = new Letter(obj.letter.letter, obj.letter.amount);
-        return this;
+    static fromObject(obj: any): Case {
+        let c = new Case('normal');
+        c.type = obj.type;
+        c.bonusTaken = obj.bonusTaken;
+        if(obj.letter == null) c.letter = null;
+        else c.letter = new Letter(obj.letter.letter, obj.letter.amount);
+        return c;
     }
 }
