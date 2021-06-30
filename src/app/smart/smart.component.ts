@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class SmartComponent {
   loading = true;
   roomName = '';
-  roomExists = false;
+  roomExists: boolean | undefined = undefined;
   username = localStorage.getItem('username') ?? '';
 
   constructor(private route: ActivatedRoute, private router: Router) {
@@ -21,6 +21,7 @@ export class SmartComponent {
         res.forEach((r: string) => {
           if(r == this.roomName) this.roomExists = true;
         });
+        if(this.roomExists === undefined) this.roomExists = false;
       })
     })
   }

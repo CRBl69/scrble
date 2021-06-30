@@ -1,8 +1,0 @@
-<h2 *ngIf="error != ''">{{this.error}}</h2>
-<div class="create-room-container">
-  <form (ngSubmit)="createRoom()" class="create-room-form">
-    <input type="text" placeholder="room name" [(ngModel)]="roomName" name="roomName">
-    <input type="text" placeholder="user name" [(ngModel)]="playerName" name="playerName">
-    <button type="submit">Create room</button>
-  </form>
-</div>

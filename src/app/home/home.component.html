@@ -1,13 +1,6 @@
-<marquee>
-    <h1>Welcome {{getUsername()}} !</h1>
-</marquee>
+<h1>Welcome {{this.username}} !</h1>
 
 <div class="container">
-    <button (click)="clearUsername()" id="clear-username">Clear username</button>
-    <a routerLink="/rooms"><button id="room-list">Room list</button></a>
-    <a routerLink="/room"><button id="create-room">Create room</button></a>
-    <form (ngSubmit)="join(roomName.value)">
-        <input type="text" #roomName name="roomName">
-        <button type="submit" id="join-room">Join room</button>
-    </form>
+    <input type="text" placeholder="username" #usernameInput [(ngModel)]="username" name="username" (ngModelChange)="setUsername()">
+    <button id="create-room" (click)="newRoom()">Create room</button>
 </div>
