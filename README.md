@@ -1,27 +1,16 @@
-# Scrabble
+# sCRBle
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.4.
+Front-end code for the sCRBle game (it's just scrabble).
 
-## Development server
+## Why ?
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+I wanted to play this with some people over the internet but I didn't find any great websites to play it
 
-## Code scaffolding
+## How to set up ?
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Install the angular cli (if not already installed)
+2. Create a .env file
+3. Add a BACKEND\_URL variable which shall be the url to your backend server (ex.: `BACKEND_URL="scrble-server.my-website.com"`)
+4. Add a BACKEND\_PORT variable which shall be the port your backend server is running on (ex.: `BACKEND_PORT=6942`)
+5. Run `npm run build`
+6. Serve the content of dist/scrabble with the server of your choice (apache, nginx, etc...)
