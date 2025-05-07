@@ -19,7 +19,7 @@ export class HomeComponent {
 
   newRoom() {
     if(localStorage.getItem('username') != null) {
-      fetch(`http://${environment.domain}:6942/new-room`).then(res => res.text()).then(res => {
+      fetch(`http://${environment.domain}:${environment.port}/new-room`).then(res => res.text()).then(res => {
         this.router.navigateByUrl(`/room/${res}`);
       })
     }

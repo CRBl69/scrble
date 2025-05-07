@@ -24,7 +24,7 @@ export class ScrabbleComponent implements OnDestroy {
   error = '';
 
   constructor() {
-    this.ws = new WebSocket(`ws://${environment.domain}:6942/ws`);
+    this.ws = new WebSocket(`ws://${environment.domain}:${environment.port}/ws`);
     this.ws.onmessage = this.handleWs;
     this.ws.onopen = () => {
       this.sendMsg({

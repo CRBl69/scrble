@@ -17,7 +17,7 @@ export class SmartComponent {
     this.route.paramMap.subscribe(res => {
       this.roomName = res.get('name')!;
       console.log(this.roomName);
-      fetch(`http://${environment.domain}:6942/rooms`).then(res => res.json()).then(res => {
+      fetch(`http://${environment.domain}:${environment.port}/rooms`).then(res => res.json()).then(res => {
         res.forEach((r: string) => {
           if(r == this.roomName) this.roomExists = true;
         });
